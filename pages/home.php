@@ -132,54 +132,38 @@ $NUM_PICTURES = 3;
 <div id="home">
     <div id="middle">
 
-    <?php
-
-		//Display the Featured Article
-		$featured_article = $general->get_featured_article();
-		echo '<div class="article">';
-			echo '	<div class="article_info">';
-			
-			//Event Title
-      echo '		<div class="article_title">' . $featured_article['title'] . '</div>';
-			echo '<div class="article_date">' . $featured_article['author'] . ' at ' . date("g:ia", strtotime($featured_article['created_at'])) . ' on ' . date("F jS o", strtotime($featured_article['created_at'])) . '</div>';
-			echo '	<a href="?page=article"><div class="article_img"><img src="css/img/article_img/' . $featured_article['img'] . '"/></div></a>';
-      //Event Summary
-			echo '	<div class="article_summary">' . $general->summarize($featured_article['content'], $MAX_SUMMARY_LEN) . '</div>';
-			echo '	<a href="?page=article"><div class="article_more">Read More ></div></a>';
-			echo '	</div>
-						</div>';
+		<?php
 		
-			/*
-			 * If there are no articles. then this freaks out!
-			 * 
-		foreach($general->get_all_articles(5) as $articleInfo) {
-			echo '<div class="article">';
-			echo '	<div class="article_info">';
-			
-			//Event Title
-      echo '		<div class="article_title">' . $articleInfo['title'] . '</div>';
-			echo '	<div class="article_img"><img src="css/img/event/' . $articleInfo['author'] . '"/></div>';
-			echo '<div class="article_date">' . $articleInfo['author'] . ' at ' . date("g:ia", strtotime($articleInfo['created_at'])) . ' on ' . date("F jS o", strtotime($articleInfo['created_at'])) . '</div>';
-      //Event Summary
-			echo '	<div class="article_summary">' . $articleInfo['content'] . '</div>';
-			echo '	<div class="clear"></div>';
-			echo '	</div>
-						</div>';
-		}
-		*/
+		// postAuthor should be ID not the string... so that if a name changes it 
+		
+			try {
 
+				$stmt = $db->query('SELECT postID, postTitle, postAuthor, postImg, postCont, postDate FROM blog_posts ORDER BY postID DESC');
+				while($row = $stmt->fetch()){
+					
+					echo '<div class="article">';
+					echo '	<div class="article_info">';
+					//Event Title
+					echo '		<div class="article_title"><a href="?page=viewpost&id='.$row['postID'].'">'.$row['postTitle'].'</a></div>';
+					echo '		<div class="article_date">'.$row['postAuthor'].' at ' . date('jS M Y H:i:s', strtotime($row['postDate'])) . ' on ' . date('jS M Y H:i:s', strtotime($row['postDate'])) . '</div>';
+					echo '		<a href="?page=viewpost&id='.$row['postID'].'"><div class="article_img"><img src="css/img/article_img/' . $row['postImg'] . '"/></div></a>';
+					//Event Summary
+					echo '		<div class="article_summary">' . $general->summarize($row['postCont'], $MAX_SUMMARY_LEN) . '</div>';
+					echo '		<a href="?page=viewpost&id='.$row['postID'].'"><div class="article_more">Read More ></div></a>';
+					echo '	</div>
+								</div>';
 
-    ?>
+				}
+
+			} catch(PDOException $e) {
+			    echo $e->getMessage();
+			}
+		?>
         <!-- Link to all news -->
         <!--<div id="past_news">Past News</div>-->
         <div class="clear"></div>
-    </div>
+				</div>
 	<div id="left">
-	    <div id="feature">
-		    <!---<div class="title">Featured Event</div>
-                    <div id="featured_img"><img src="kbbq.jpg"/></div>
-										NACC LoL-->
-		</div>
         <div id="stream_list">
             <div class="title">Featured Streamers</div>
             <?php
@@ -211,8 +195,3 @@ $NUM_PICTURES = 3;
         </div>
     </div>
 </div>
-
-<?php
-
-
-?>

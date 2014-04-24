@@ -1,7 +1,7 @@
 <?php 
 
 //The links on the navbar
-$pages = array("home", "members", "store", "pictures", "compete", "events", "about");
+$pages = array("home", "members", "store", "pictures", "compete", "about");
 
 ?>
 

@@ -6,7 +6,7 @@
 class Database {
 	function open_db_connection() {
 		$config = array(
-			'host'		=> 'localhost',
+			'host'		=> '173.254.28.123',
 			'username'	=> 'lvtranco_michael',
 			'password'	=> 'sqlman',
 			'dbname' 	=> 'lvtranco_lotDev'

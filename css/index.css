@@ -527,7 +527,6 @@ body {
 }
 
 .article_img img {
-		height: 400px;
     width: 100%;
 }
 
@@ -1714,7 +1713,6 @@ tr.adminRow:hover {
 
 #article_img img {
 	width: 610px;
-	height: 343px;
 }
 
 #article_content {

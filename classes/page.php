@@ -1,6 +1,6 @@
 <?php 
 
-class Page {
+class LoT_Page {
 	public $page;
 	public $pageURL;
 	public $title; 

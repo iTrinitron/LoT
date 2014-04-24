@@ -32,6 +32,12 @@ require 'core/init.php';
 	<!-- Import Form-Handling JS -->
 		<script src="js/form.js"></script>
 		<script src="js/form_plugin.js"></script>
+		
+		<!-- Import Blog CSS -->
+		<link rel="stylesheet" href="../style/normalize.css">
+  <link rel="stylesheet" href="../style/main.css">
+	<script src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+		
 	<!-- Format TextArea -->
 	<script src="libraries/ckeditor/ckeditor.js"></script>
 

@@ -3,6 +3,9 @@
 #starting the users session
 session_start();
 
+//Blog needs this?
+ob_start();
+
 require 'db/database.php';
 require 'classes/users.php';
 require 'classes/general.php';
@@ -19,7 +22,7 @@ $db = $database->open_db_connection();	//Connect to the Database
 
 $users 		= new Users($db);
 $general 	= new General($db);
-$page			= new Page($DEFAULT_PAGE);
+$page			= new LoT_Page($DEFAULT_PAGE);
  
 if ($general->logged_in() === true)  { // check if the user is logged in
   $user_id = $_SESSION['id']; // getting user's id from the session.
