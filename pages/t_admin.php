@@ -15,7 +15,7 @@ if($user['access'] < 300) {
 
 
 //$tournamentObj->endGroupStage();
-$tournamentObj->createBracket();
+//$tournamentObj->endTournament();
 ?>
 
 <div class="box">

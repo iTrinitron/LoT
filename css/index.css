@@ -578,6 +578,10 @@ body {
     color: #999;
 }
 
+#article_content a {
+	color: #07c;
+}
+
 #home #right {
     float: left;
     width: 22%;

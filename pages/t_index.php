@@ -25,12 +25,20 @@ $tournament = $tournamentObj->tournamentData();
         <div id="tname"><?php echo $tournament['name']; ?></div>
         <div id="t_navbar">
             <?php 
+						
+						//Admin page
+						if($general->logged_in()) {
+							if($user['access'] > 900) {
+                echo '<a href="?page=t_index&tpage=admin&tid=' . $tournament['id'] . '"><div class="link">Admin</div></a>';
+							}
+						}
     
             //Generate the navbar; in reverse order
             $pages = $tournamentObj->get_navbar();
             for($i=0; $i<count($pages); ++$i) {
                 echo '<a href="?page=t_index&tpage=' . $pages[$i] . '&tid=' . $tournament['id'] . '"><div class="link">' . $pages[$i] . '</div></a>';
-            }
+						}
+						
             ?>
         </div>
     </div>

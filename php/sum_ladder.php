@@ -5,7 +5,7 @@
  * Description: Sums up the ladder points for each player
  */
 
-require('../db/database.php');
+require('../core/init.php');
 
 $query = $db->prepare("SELECT DISTINCT user_id FROM ladder");
 $query->execute();

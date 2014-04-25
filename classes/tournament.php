@@ -131,6 +131,9 @@ Class Tournament {
         $query = $this->db->prepare("UPDATE `tournaments` SET status=3 WHERE id=?");
         $query->bindValue(1, $this->id);
         $query->execute();
+				
+				//Update the ladder
+				$this->sum_ladder();
     }
     
     public function get_navbar() {
@@ -560,6 +563,32 @@ echo "grabbing teams";
 	  
 	  echo 'done';
     }
+		
+		private function sum_ladder() {
+			$query = $this->db->prepare("SELECT DISTINCT user_id FROM ladder");
+			$query->execute();
+
+			/* ADD A DATE? Maybe that can help so we don't redo things */
+
+			//Fetch each person... and then sum up their points
+			while($player = $query->fetch()) {
+					echo $player['user_id'];
+
+					$sumQuery = $this->db->prepare("SELECT SUM(points) FROM ladder WHERE user_id = ?");
+					$sumQuery->bindValue(1, $player['user_id']);
+					$sumQuery->execute();
+
+
+					$total_points = $sumQuery->fetchColumn();
+
+					$insertSum = $this->db->prepare("INSERT INTO ladder_sum (user_id, total) VALUES (:user_id, :total)
+			ON DUPLICATE KEY UPDATE
+			user_id = :user_id, total = :total");
+					$insertSum->bindValue(':user_id', $player['user_id']);
+					$insertSum->bindValue(':total', $total_points);
+					$insertSum->execute();
+			}
+		}
 }
 
 ?>

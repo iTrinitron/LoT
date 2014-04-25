@@ -58,13 +58,7 @@ $stream = new stream("SoKorean");
         </div>
         
         <?php
-        if($general->logged_in()) {
-            if($user['access'] > 900) {
-                echo '<div class="tbox">
-                    <a href="?page=t_index&tpage=admin&tid=' . $tournament['id'] . '">Administrate</a>
-                </div>';
-            }
-        }
+        
         ?>
     </div>
     <!-- Content to the right -->
